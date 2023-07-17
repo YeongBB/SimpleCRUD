@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>Content</h2>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="col">
+                <button class="btn btn-primary float-end"
+                        onclick="location.href='createForm.html'"
+                        th:onclick="|location.href='@{/content/create}'|"
+                        type="button">새 글 작성
+                </button>
+            </div>
+        </div>
+    </div>
+    </form>
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>제목</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="story : ${stories}">
+                <td><a href="content.html" th:href="@{/contents/{storyId}(storyId=${story.id})}" th:text="${story.id}">ContentId</a></td>
+                <td><a href="content.html" th:href="@{|/contents/${storyId.id}|}" th:text="${story.name}">제목</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div> <!-- /container -->
+
+</body>
+</html>
