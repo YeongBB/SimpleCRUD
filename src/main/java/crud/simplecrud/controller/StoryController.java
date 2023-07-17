@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -25,12 +26,13 @@ public class StoryController {
     }
 
     @PostMapping("/new")
-    public String create(StoryForm storyForm){
+    public String create(StoryForm storyForm, RedirectAttributes redirectAttributes){
 
         Story story = new Story(storyForm.getName(), storyForm.getContent());
 
         storyService.join(story);
-        return "redirect:/";
+        redirectAttributes.addAttribute("storyId", story.getId());
+        return "redirect:/content/{stroyId}";
     }
 
     // 리스트 출력
